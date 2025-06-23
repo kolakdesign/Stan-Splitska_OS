@@ -1,4 +1,3 @@
-
 'use strict';
 
 (function() {
@@ -6,7 +5,6 @@
   var bowser = window.bowser;
   var screenfull = window.screenfull;
   var data = window.APP_DATA;
-  var activeScene = null;
 
   // Grab elements from DOM.
   var panoElement = document.querySelector('#pano');
@@ -182,15 +180,11 @@
 
   function switchScene(scene) {
     stopAutorotate();
-    var initialViewParameters = scene.data.initialViewParameters;
-    scene.view.setParameters(initialViewParameters);
-    activeScene = scene;
+    scene.view.setParameters(scene.data.initialViewParameters);
     scene.scene.switchTo();
     startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
-    updateMapImage(scene);
-    updateMarker(scene);
   }
 
   function updateSceneName(scene) {
@@ -212,17 +206,6 @@
     sceneListElement.classList.add('enabled');
     sceneListToggleElement.classList.add('enabled');
   }
-
-  function hideSceneList() {
-    sceneListElement.classList.remove('enabled');
-    sceneListToggleElement.classList.remove('enabled');
-  }
-
-  function toggleSceneList() {
-    sceneListElement.classList.toggle('enabled');
-    sceneListToggleElement.classList.toggle('enabled');
-  }
-
 
   function requestPermissionForIOS() {
 
@@ -270,6 +253,16 @@
       deviceOrientationToggleElement.classList.add('enabled');
       enable();
     }
+  }
+
+  function hideSceneList() {
+    sceneListElement.classList.remove('enabled');
+    sceneListToggleElement.classList.remove('enabled');
+  }
+
+  function toggleSceneList() {
+    sceneListElement.classList.toggle('enabled');
+    sceneListToggleElement.classList.toggle('enabled');
   }
 
   function startAutorotate() {
